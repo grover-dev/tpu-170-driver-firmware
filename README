@@ -1,0 +1,13 @@
+Firmware repo for adoresat/trashsat/bsasat
+
+
+For compiling we use a makefile:
+
+make <target>
+
+Current targets:
+
+lpc822
+
+Programming:
+Currently using an LPC Link2 flashed with jlink firmware. Highly suggest using Segger's Ozone (excellent ARM debugging software). A configuration file for this project is provided in the jlink folder. Simply load the .jlink and you should be able to easily upload code/start debugging.
