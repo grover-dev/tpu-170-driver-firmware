@@ -18,7 +18,7 @@ INCLUDES := $(wildcard $(INC)/*.h)
 OBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SOURCES))
 
 $(OBJ)/%.o: $(SRC)/%.c
-	$(CC) -I$(LIB) -c $< -o $@ $(CFLAGS)
+	$(CC) -I$(LIB) -I$(INC)  -c $< -o $@ $(CFLAGS)
 
 
 all: $(OBJECTS)

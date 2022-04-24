@@ -3,6 +3,7 @@
 #include "adc.h"
 #include "uart.h"
 #include "timers.h"
+#include "pins.h"
 
 
 void init(void){
@@ -11,9 +12,36 @@ void init(void){
     uart_init();
     sct_timer_init();
 
-    gpio_set_direction(16, OUTPUT);
-    gpio_set_direction(27, OUTPUT);
-    gpio_set_direction(12, OUTPUT);
+    gpio_set_direction(A_FET_PIN, OUTPUT);
+    gpio_set_direction(B_FET_PIN, OUTPUT);
+    gpio_set_direction(C_FET_PIN, OUTPUT);
+    gpio_set_direction(D_FET_PIN, OUTPUT);
+
+
+    // configure AB, CD current sense amplifier shutdown pins  
+    // and then set them high to enable the devices
+    gpio_set_direction(AB_OPAMP_SHUTDOWN_PIN, OUTPUT);
+    gpio_set_direction(CD_OPAMP_SHUTDOWN_PIN, OUTPUT);
+    gpio_set_pin(AB_OPAMP_SHUTDOWN_PIN, OUTPUT);    
+    gpio_set_pin(CD_OPAMP_SHUTDOWN_PIN, OUTPUT);    
+
+    
+    gpio_set_direction(HALL_UX_PIN, INPUT);
+    gpio_set_direction(HALL_WY_PIN, INPUT);
+
+    //todo: test if this works 
+    uart_add_periheral(0, RS232_TX_PIN, RS232_RX_PIN, DISABLE_PIN,DISABLE_PIN, DISABLE_PIN);
+
+    adc_enable_disable(A_SENSE_FILT_ADC, true);
+    adc_enable_disable(B_SENSE_FILT_ADC, true);
+    adc_enable_disable(C_SENSE_FILT_ADC, true);
+    adc_enable_disable(D_SENSE_FILT_ADC, true);
+    
+    adc_enable_disable(TEMP_SENSE_ADC, true);
+    adc_enable_disable(PRESSURE_SENSE_ADC, true);
+
+    adc_set_sample_rate(1000000);
+
 }
 
 

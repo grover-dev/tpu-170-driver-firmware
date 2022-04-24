@@ -109,10 +109,10 @@ void reset_handler(void){
     LPC_IOCON->PIO0_8 = 0x00;
 
     // enable XTALIN, XTALOUT
-    LPC_SWM->PINENABLE0 ^= 0b11000000;
+    LPC_SWM->PINENABLE0 &= ~0b11000000;
 
     // disable oscillator bypass, set freq range to 1 - 20 Mhz
-    LPC_SYSCON->PDRUNCFG = 0x00;
+    LPC_SYSCON->PDRUNCFG = 0x10;
 
 
     // Copy .data to RAM     
